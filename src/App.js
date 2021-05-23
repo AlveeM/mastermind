@@ -1,16 +1,11 @@
 import React, { useEffect } from 'react';
 import './App.css';
 
-import { generateCode } from './api/codeGenerator'
+import { generateIntegerCode } from './api/codeGenerator'
 
 function App() {
   useEffect(() => {
-    const codeConfig = {
-      num: 4,
-      min: 0,
-      max: 7
-    };
-    generateCode(codeConfig).then(console.log)
+    generateIntegerCode().then(console.log)
   }, []) 
 
   return (
