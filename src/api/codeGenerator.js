@@ -12,7 +12,11 @@ export async function generateIntegerCode({
     const res = await fetch(URL)
       .then((r) => r.text())
       .then((code) => {
-        return code.slice(0, code.length-1).split("\n");
+        const parsedCode = code
+                            .slice(0, code.length-1)
+                            .split("\n")
+                            .map(num => parseInt(num));
+        return parsedCode;
       });
     return res;
   } catch (err) {
