@@ -1,0 +1,25 @@
+.slot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  margin: 0 2px;
+  background-color: #313131;
+}
+
+.slot--active {
+  cursor: pointer;
+  transition: 0.2s;
+  background-color: #4b4b4b;
+}
+
+.slot--active:hover {
+  border: solid 2px white;
+  box-sizing: border-box;
+}
+
+.slot--selected {
+  background-color: #9edff5;
+  box-shadow: 0 0 5px #9edff5;
+}

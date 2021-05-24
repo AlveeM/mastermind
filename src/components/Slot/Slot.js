@@ -1,10 +1,11 @@
 import React from 'react'
+import "./Slot.css"
 
 function Slot() {
-  const slotClass = `slot slot-option__${0} slot--active`;
+  const slotClass = `slot slot--unselected slot--active`;
 
   return (
-    <div className={slotClass}></div>
+    <div className={slotClass}>0</div>
   )
 }
 
