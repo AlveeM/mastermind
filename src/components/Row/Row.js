@@ -1,7 +1,7 @@
 import React from 'react'
+import "./Row.css"
 import Clues from '../Clues/Clues'
 import Slots from '../Slots/Slots'
-import "./Row.css"
 
 function Row({
   row,
@@ -9,16 +9,17 @@ function Row({
   clues,
   currentRow,
   updateSlot,
+  checkGuess,
+  isPlaying
 }) {
   return (
     <tr className="row">
       <td>
-        <Clues clues={clues} />
+        <Clues clues={clues} currentRow={currentRow} />
       </td>
       <td>
         <Slots {...{
           slots,
-          clues,
           row,
           currentRow,
           updateSlot
@@ -26,9 +27,11 @@ function Row({
       </td>
       <td>
         <button
-          disabled={row !== currentRow}
+          className="row-btn-check"
+          disabled={!isPlaying || row !== currentRow}
+          onClick={checkGuess}
         >
-          Check
+          check
         </button>
       </td>
     </tr>

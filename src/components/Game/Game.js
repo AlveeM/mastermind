@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { generateIntegerCode } from '../../api/codeGenerator'
 import Board from '../Board/Board'
 
-const defaultCode = [-1, -1, -1, -1];
+// const defaultCode = [-1, -1, -1, -1];
+const defaultCode = [5, 1, 6, 3];
 const defaultOptions = [0, 1, 2, 3, 4, 5, 6, 7];
 const defaultRows = getDefaultRows();
 const defaultGameState = {
@@ -19,21 +20,11 @@ const defaultGameState = {
 function Game() {
   const [gameCode, setGameCode] = useState(defaultCode);
   const [gameState, setGameState] = useState(defaultGameState);
-  const {
-    isPlaying,
-    code,
-    turn,
-    rows,
-    currentOption,
-    currentRow,
-    options,
-    isWon
-  } = gameState;
 
   function updateSlot(row, col) {
-    if (row !== currentRow) return;
+    if (row !== gameState.currentRow) return;
     const newRows = gameState.rows.slice();
-    newRows[row].values[col] = currentOption;
+    newRows[row].values[col] = gameState.currentOption;
     setGameState(prev => {
       return {
         ...prev,
@@ -46,9 +37,94 @@ function Game() {
     setGameState({ ...gameState, currentOption: option });
   }
 
+  function updateClues(row, correctVal, correctPos) {
+    console.log({row, correctVal, correctPos, updateClues: "UPDATE CLUES"})
+    const newRows = gameState.rows.slice();
+    const clues = newRows[row].clues;
+    let curIdx = 0;
+
+    for (let i = 0; i < correctPos.length; i++) {
+      clues[curIdx] = 2;
+      curIdx++;
+    }
+
+    for (let i = 0; i < correctVal.length; i++) {
+      clues[curIdx] = 1;
+      curIdx++;
+    }
+
+    setGameState(prev => {
+      return {
+        ...prev,
+        rows: newRows
+      }
+    })
+  }
+
+  function checkGuess() {
+    const curVals = gameState.rows[gameState.currentRow].values;
+    
+    if (curVals.indexOf(-1) !== -1) return;
+
+    const correctVal = [];
+    const correctPos = [];
+    const code = gameState.code;
+
+    for (let i = 0; i < code.length; i++) {
+      const slotVal = curVals[i];
+      const correctValIdx = correctVal.indexOf(slotVal);
+      const correctPosIdx = correctPos.indexOf(slotVal);
+      const isCorrectVal = correctValIdx !== -1;
+      const isCorrectPos = correctPosIdx !== -1;
+
+      if (slotVal === code[i]) {
+        correctPos.push(slotVal);
+        if(isCorrectVal) {
+          correctVal.splice(correctValIdx, 1);
+        }
+      } else if (code.indexOf(slotVal) !== -1
+              && !isCorrectVal
+              && !isCorrectPos) {
+        correctVal.push(slotVal);
+      }
+    }
+
+    if (correctPos.length === 4) {
+      updateClues(gameState.currentRow, correctVal, correctPos);
+      setGameState(prev => {
+        return {
+          ...prev,
+          isPlaying: false,
+          isWon: true
+        }
+      })
+      return;
+    } else {
+      updateClues(gameState.currentRow, correctVal, correctPos);
+    }
+
+    if (gameState.currentRow - 1 < 0) {
+      setGameState(prev => {
+        return {
+          ...prev,
+          isPlaying: false
+        }
+      })
+      return;
+    }
+
+    setGameState(prev => {
+      return {
+        ...prev,
+        currentRow: prev.currentRow - 1
+      }
+    })
+  }
+
   const gameFuncs = {
     updateSlot,
     updateCurrentOption,
+    checkGuess,
   }
 
   return (

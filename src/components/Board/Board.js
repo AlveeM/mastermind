@@ -2,12 +2,11 @@ import React from 'react'
 import "./Board.css"
 import Row from '../Row/Row';
 import Slots from '../Slots/Slots'
-import Option from '../Option/Option'
 import Options from '../Options/Options';
 
 function Board({ gameState, gameFuncs }) {
-  const { currentRow, rows, options, currentOption } = gameState;
-  const { updateSlot, updateCurrentOption } = gameFuncs;
+  const { currentRow, rows, options, isPlaying, code } = gameState;
+  const { updateSlot, checkGuess } = gameFuncs;
 
   return (
     <table className="board">
@@ -16,20 +15,24 @@ function Board({ gameState, gameFuncs }) {
           <td></td>
           <td>
             <Slots {...{
-                row: 9,
-                slots: rows[9].values,
-                currentRow,
-                updateSlot }} 
-            />
+                row: -1,
+                slots: isPlaying ? [-1, -1, -1, -1] : code }} />
           </td>
         </tr>
-        <Row {...{
-          row: 8,
-          slots: rows[8].values,
-          clues: rows[8].clues,
-          updateSlot,
-          currentRow,
-        }} />
+        {
+          rows.map((row, i) => (
+            <Row {...{
+              key: `row-${i}`,
+              row: i,
+              slots: row.values,
+              clues: row.clues,
+              updateSlot,
+              checkGuess,
+              currentRow,
+              isPlaying
+            }} />
+          ))
+        }
         <tr>
           <td></td>
           <td>
