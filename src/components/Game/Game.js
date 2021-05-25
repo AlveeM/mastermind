@@ -17,13 +17,39 @@ const defaultGameState = {
 }
 
 function Game() {
-  const [code, setCode] = useState(defaultCode);
+  const [gameCode, setGameCode] = useState(defaultCode);
   const [gameState, setGameState] = useState(defaultGameState);
+  const {
+    isPlaying,
+    code,
+    turn,
+    rows,
+    currentOption,
+    currentRow,
+    options,
+    isWon
+  } = gameState;
+
+  function updateSlot(row, col) {
+    if (row !== currentRow) return;
+    const newRows = gameState.rows.slice();
+    newRows[row].values[col] = currentOption;
+    setGameState(prev => {
+      return {
+        ...prev,
+        rows: newRows
+      }
+    })
+  }
+
+  const gameFuncs = {
+    updateSlot,
+  }
 
   return (
     <div className="game">
       <div className="game-board">
-        <Board gameState={gameState} />
+        <Board gameState={gameState} gameFuncs={gameFuncs} />
       </div>
     </div>
   )
@@ -36,7 +62,7 @@ function getDefaultRows() {
   for (let i = 0; i <= 9; i++) {
     rows.push({
       clues: [-1, -1, -1, -1],
-      inputs: [-1, -1, -1, -1]
+      values: [-1, -1, -1, -1]
     })
   }
   return rows;
