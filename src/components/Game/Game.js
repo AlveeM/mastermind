@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { generateIntegerCode } from '../../api/codeGenerator'
 import Board from '../Board/Board'
 
-// const defaultCode = [-1, -1, -1, -1];
-const defaultCode = [5, 1, 6, 3];
+const defaultCode = [-1, -1, -1, -1];
 const defaultOptions = [0, 1, 2, 3, 4, 5, 6, 7];
 const defaultRows = getDefaultRows();
 const defaultGameState = {
@@ -18,8 +17,19 @@ const defaultGameState = {
 }
 
 function Game() {
-  const [gameCode, setGameCode] = useState(defaultCode);
   const [gameState, setGameState] = useState(defaultGameState);
+
+  useEffect(() => {
+    generateIntegerCode()
+      .then(randomCode => {
+        setGameState(prev => {
+          return {
+            ...prev,
+            code: randomCode
+          }
+        })
+      })
+  }, [])
 
   function updateSlot(row, col) {
     if (row !== gameState.currentRow) return;
