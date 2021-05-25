@@ -2,10 +2,14 @@ import React, { useState } from 'react'
 import "./Slot.css"
 
 function Slot({ row, col, value, currentRow, updateSlot}) {
-  let slotClass = `slot slot--active`;
+  let slotClass = `slot`;
+
+  if (row === currentRow) {
+    slotClass += " slot--active"
+  }
 
   if (value > -1) {
-    slotClass += ' slot--selected';
+    slotClass += " slot--selected";
   }
 
   function selectSlot() {
