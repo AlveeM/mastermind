@@ -1,0 +1,18 @@
+.clue {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 1px solid black;
+}
+
+.clue--0 {
+  background-color: white;
+}
+
+.clue--1 {
+  background-color: orange;
+}
+
+.clue--2 {
+  background-color: greenyellow;
+}

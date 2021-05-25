@@ -1,4 +1,5 @@
 import React from 'react'
+import Clues from '../Clues/Clues'
 import Slots from '../Slots/Slots'
 import "./Row.css"
 
@@ -12,11 +13,12 @@ function Row({
   return (
     <tr className="row">
       <td>
-        Clues
+        <Clues clues={clues} />
       </td>
       <td>
         <Slots {...{
           slots,
+          clues,
           row,
           currentRow,
           updateSlot

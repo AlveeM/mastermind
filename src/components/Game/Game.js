@@ -61,7 +61,7 @@ function getDefaultRows() {
   const rows = [];
   for (let i = 0; i <= 9; i++) {
     rows.push({
-      clues: [-1, -1, -1, -1],
+      clues: [0, 0, 0, 0],
       values: [-1, -1, -1, -1]
     })
   }
