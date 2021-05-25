@@ -1,0 +1,12 @@
+.options {
+  display: inline-block;
+  margin: auto;
+  text-align: center;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 5px;
+  margin: 10px 0;
+}

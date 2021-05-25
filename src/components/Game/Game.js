@@ -42,8 +42,13 @@ function Game() {
     })
   }
 
+  function updateCurrentOption(option) {
+    setGameState({ ...gameState, currentOption: option });
+  }
+
   const gameFuncs = {
     updateSlot,
+    updateCurrentOption,
   }
 
   return (

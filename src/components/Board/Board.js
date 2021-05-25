@@ -1,10 +1,13 @@
 import React from 'react'
+import "./Board.css"
 import Row from '../Row/Row';
 import Slots from '../Slots/Slots'
+import Option from '../Option/Option'
+import Options from '../Options/Options';
 
 function Board({ gameState, gameFuncs }) {
-  const { currentRow, rows } = gameState;
-  const { updateSlot } = gameFuncs;
+  const { currentRow, rows, options, currentOption } = gameState;
+  const { updateSlot, updateCurrentOption } = gameFuncs;
 
   return (
     <table className="board">
@@ -27,6 +30,18 @@ function Board({ gameState, gameFuncs }) {
           updateSlot,
           currentRow,
         }} />
+        <tr>
+          <td></td>
+          <td>
+            <div className="board-options">
+              <Options {...{
+                options,
+                gameState,
+                gameFuncs
+              }} />
+            </div>
+          </td>
+        </tr>
       </tbody>
     </table>
   )

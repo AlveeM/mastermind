@@ -1,0 +1,15 @@
+.option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  transition: 0.2s;
+  border: 1px solid black;
+}
+
+.option:hover,
+.option--active {
+  background-color: lightgrey;
+}
