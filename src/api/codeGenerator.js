@@ -20,6 +20,6 @@ export async function generateIntegerCode({
       });
     return res;
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 }

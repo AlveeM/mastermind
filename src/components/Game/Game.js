@@ -33,7 +33,7 @@ function Game() {
 
   function updateSlot(row, col) {
     if (row !== gameState.currentRow) return;
-    const newRows = gameState.rows.slice();
+    const newRows = gameState.rows;
     newRows[row].values[col] = gameState.currentOption;
     setGameState(prev => {
       return {
@@ -48,8 +48,7 @@ function Game() {
   }
 
   function updateClues(row, correctVal, correctPos) {
-    console.log({row, correctVal, correctPos, updateClues: "UPDATE CLUES"})
-    const newRows = gameState.rows.slice();
+    const newRows = gameState.rows;
     const clues = newRows[row].clues;
     let curIdx = 0;
 
@@ -93,8 +92,8 @@ function Game() {
           correctVal.splice(correctValIdx, 1);
         }
       } else if (code.indexOf(slotVal) !== -1
-              && !isCorrectVal
-              && !isCorrectPos) {
+                  && !isCorrectVal
+                  && !isCorrectPos) {
         correctVal.push(slotVal);
       }
     }

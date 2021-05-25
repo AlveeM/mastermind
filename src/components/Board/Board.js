@@ -15,8 +15,8 @@ function Board({ gameState, gameFuncs }) {
           <td></td>
           <td>
             <Slots {...{
-                row: -1,
-                slots: isPlaying ? [-1, -1, -1, -1] : code }} />
+              row: -1,
+              slots: isPlaying ? [-1, -1, -1, -1] : code }} />
           </td>
         </tr>
         {
