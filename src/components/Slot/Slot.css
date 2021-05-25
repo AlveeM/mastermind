@@ -5,13 +5,13 @@
   width: 35px;
   height: 35px;
   margin: 0 2px;
-  background-color: #313131;
+  background-color: #1b1b1b;
 }
 
 .slot--active {
   cursor: pointer;
   transition: 0.2s;
-  background-color: #4b4b4b;
+  background-color: #858585;
 }
 
 .slot--active:hover {
