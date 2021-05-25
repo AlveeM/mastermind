@@ -147,6 +147,10 @@ function Game() {
 
   return (
     <div className="game">
+      <div className="game-clue-key">
+        <p><span className="game-clue-box game-clue-box__green"></span> - Correct Position</p>
+        <p><span className="game-clue-box game-clue-box__orange"></span> - Correct Value</p>
+      </div>
       <Board gameState={gameState} gameFuncs={gameFuncs} />
       <button className="game-reset-btn" onClick={resetGame}>New Game</button>
     </div>

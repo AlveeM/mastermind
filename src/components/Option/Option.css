@@ -11,5 +11,5 @@
 
 .option:hover,
 .option--active {
-  background-color: lightgrey;
+  background-color: #d3d3d3;
 }
