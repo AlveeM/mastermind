@@ -14,7 +14,6 @@ const defaultGameState = {
   currentOption: 0,
   currentRow: 9,
   options: defaultOptions,
-  isWon: false
 }
 
 function Game() {
@@ -106,7 +105,6 @@ function Game() {
         return {
           ...prev,
           isPlaying: false,
-          isWon: true
         }
       })
       return;
@@ -133,10 +131,14 @@ function Game() {
   }
 
   function resetGame() {
-    setGameState({
-      ...defaultGameState,
-      rows: getDefaultRows()
-    });
+    generateIntegerCode()
+      .then(randomCode => {
+        setGameState({
+          ...defaultGameState,
+          code: randomCode,
+          rows: getDefaultRows()
+        });
+      })
   }
 
   const gameFuncs = {
