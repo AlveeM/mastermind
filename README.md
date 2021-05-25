@@ -3,7 +3,7 @@
 
 # How to Play
 ## Online
-1. Visit [this link](https://mastermind-react-hooks.netlify.app/).
+1. Visit <a href="https://mastermind-react-hooks.netlify.app/" target="_blank">this link</a>.
 2. Start playing!
 
 ## Offline
