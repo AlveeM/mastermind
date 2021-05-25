@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import "./Game.css"
 import { generateIntegerCode } from '../../api/codeGenerator'
 import Board from '../Board/Board'
 
@@ -131,6 +132,13 @@ function Game() {
     })
   }
 
+  function resetGame() {
+    setGameState({
+      ...defaultGameState,
+      rows: getDefaultRows()
+    });
+  }
+
   const gameFuncs = {
     updateSlot,
     updateCurrentOption,
@@ -139,9 +147,8 @@ function Game() {
 
   return (
     <div className="game">
-      <div className="game-board">
-        <Board gameState={gameState} gameFuncs={gameFuncs} />
-      </div>
+      <Board gameState={gameState} gameFuncs={gameFuncs} />
+      <button className="game-reset-btn" onClick={resetGame}>New Game</button>
     </div>
   )
 }
